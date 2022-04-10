@@ -2,8 +2,14 @@
 
 ### Overview
 
-##### Tech Stack
+##### 🚀 Tech Stack
 [Java](https://www.java.com/en/)
+[Maven](https://maven.apache.org/)
+[PostgreSQL](https://www.postgresql.org/)
+[Hibernate](https://hibernate.org/)
+[Lombok](https://projectlombok.org/)
+[Log4j2](https://logging.apache.org/log4j/2.x/)
+[JetBrains Annotations](https://www.jetbrains.com/help/idea/annotating-source-code.html#bundled-annotations)
 
 ##### Database UML Diagram
 ![public](https://user-images.githubusercontent.com/73034324/162642235-9480bd46-218f-4d34-8292-f41d02224f46.png)
