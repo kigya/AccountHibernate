@@ -12,7 +12,7 @@
 [JetBrains Annotations](https://www.jetbrains.com/help/idea/annotating-source-code.html#bundled-annotations)
 
 ##### Database UML Diagram
-![public](https://user-images.githubusercontent.com/73034324/162642235-9480bd46-218f-4d34-8292-f41d02224f46.png)
+![account](https://user-images.githubusercontent.com/73034324/162642669-b1bae58e-9ff1-4f9b-ab61-1030a8a91f24.png)
 
 
 
