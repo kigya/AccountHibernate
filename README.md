@@ -112,3 +112,19 @@ comment on column credit_card.card_type is 'Credit card type';
 
 comment on column credit_card.balance is 'Credit card balance';
 ```
+
+##### JSON Parsing Query
+
+```sql
+with account_json (doc) as (
+    values (''::json)
+)
+insert
+into account (id, email,password)
+select p.*
+from account_json l
+         cross join lateral json_populate_recordset(null::account, doc) as p
+on conflict (id) do update
+    set (email, password) =
+            (excluded.email, excluded.password)
+```
