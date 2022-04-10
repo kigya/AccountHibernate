@@ -3,7 +3,8 @@
 ### Overview
 
 ##### Database UML Diagram
-![public](https://user-images.githubusercontent.com/73034324/162631886-4444b341-7861-448f-a035-2546649f0ee9.png)
+![public](https://user-images.githubusercontent.com/73034324/162642235-9480bd46-218f-4d34-8292-f41d02224f46.png)
+
 
 
 ##### Example of a query to create a database
