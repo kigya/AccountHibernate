@@ -2,6 +2,9 @@
 
 ### Overview
 
+##### Tech Stack
+[Java](https://www.java.com/en/)
+
 ##### Database UML Diagram
 ![public](https://user-images.githubusercontent.com/73034324/162642235-9480bd46-218f-4d34-8292-f41d02224f46.png)
 
