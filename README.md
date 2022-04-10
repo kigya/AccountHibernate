@@ -3,12 +3,12 @@
 ### Overview
 
 ##### 🚀 Tech Stack
-[Java](https://www.java.com/en/)
-[Maven](https://maven.apache.org/)
-[PostgreSQL](https://www.postgresql.org/)
-[Hibernate](https://hibernate.org/)
-[Lombok](https://projectlombok.org/)
-[Log4j2](https://logging.apache.org/log4j/2.x/)
+[Java](https://www.java.com/en/)\
+[Maven](https://maven.apache.org/)\
+[PostgreSQL](https://www.postgresql.org/)\
+[Hibernate](https://hibernate.org/)\
+[Lombok](https://projectlombok.org/)\
+[Log4j2](https://logging.apache.org/log4j/2.x/)\
 [JetBrains Annotations](https://www.jetbrains.com/help/idea/annotating-source-code.html#bundled-annotations)
 
 ##### Database UML Diagram
