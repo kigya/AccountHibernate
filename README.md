@@ -1,11 +1,12 @@
-# AccountHibernate
+# A simple Java Clean Architecture money transfer system
 
-### Demonstration of working with PostgreSQL using Hibernate based on the Accounts database consisting of 4 tables
+### Overview
 
 ##### Database UML Diagram
-![uml](https://user-images.githubusercontent.com/73034324/162631625-07d9daf0-7450-403e-9043-8594dd879292.png)
+![public](https://user-images.githubusercontent.com/73034324/162631886-4444b341-7861-448f-a035-2546649f0ee9.png)
 
-##### Database creating query example
+
+##### Example of a query to create a database
 
 ```sql
 create sequence accounts_id_seq
