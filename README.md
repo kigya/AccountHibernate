@@ -2,7 +2,7 @@
 
 ### Overview
 
-##### 🚀 Tech Stack
+##### 📁 Tech Stack
 [Java](https://www.java.com/en/)\
 [Maven](https://maven.apache.org/)\
 [PostgreSQL](https://www.postgresql.org/)\
@@ -11,12 +11,12 @@
 [Log4j2](https://logging.apache.org/log4j/2.x/)\
 [JetBrains Annotations](https://www.jetbrains.com/help/idea/annotating-source-code.html#bundled-annotations)
 
-##### Database UML Diagram
+##### 📁 Database UML Diagram
 ![account](https://user-images.githubusercontent.com/73034324/162642669-b1bae58e-9ff1-4f9b-ab61-1030a8a91f24.png)
 
 
 
-##### Example of a query to create a database
+##### 📁 Example of a query to create a database
 
 ```sql
 create sequence accounts_id_seq
@@ -123,7 +123,7 @@ comment on column credit_card.card_type is 'Credit card type';
 comment on column credit_card.balance is 'Credit card balance';
 ```
 
-##### JSON Parsing Query
+##### 📁 JSON Parsing Query
 
 ```sql
 with account_json (doc) as (
