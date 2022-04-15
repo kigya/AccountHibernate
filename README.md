@@ -17,7 +17,7 @@
 ![credit_card](https://user-images.githubusercontent.com/73034324/163497552-065d42f5-fc9e-4100-92b0-5c3ef2756338.png)
 
 
-##### 📁 Example of a query to create a database
+##### 📁 Example of a query to create a database:
 
 ```sql
 create table gender_info
@@ -153,4 +153,14 @@ on conflict (id) do update
     set (email, password, username, bio, gender, country, city, street_address, is_active) =
             (excluded.email, excluded.password, excluded.username, excluded.bio,
              excluded.gender, excluded.country, excluded.city, excluded.street_address, excluded.street_address)
+```
+
+
+##### 📁Query to reset the counter
+```sql
+SELECT MAX(id)
+FROM account;
+SELECT nextval('account_id_seq');
+
+SELECT setval('account_id_seq', (SELECT MAX(id) FROM account) + 1);
 ```
