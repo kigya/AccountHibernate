@@ -5,11 +5,14 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import java.util.Objects;
 
-@Getter
+
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 @Accessors(fluent = true)
 @Entity
 public class Account {
@@ -20,7 +23,7 @@ public class Account {
     private int id;
 
     @Basic
-    @Column(name = "email", nullable = false, length = 40)
+    @Column(name = "email", nullable = false, length = 64)
     private String email;
 
     @Basic
@@ -28,7 +31,7 @@ public class Account {
     private String password;
 
     @Basic
-    @Column(name = "username", nullable = false, length = 12)
+    @Column(name = "username", nullable = false, length = 32)
     private String username;
 
     @Basic
@@ -37,14 +40,14 @@ public class Account {
 
     @Basic
     @Column(name = "gender", nullable = false)
-    private short gender;
+    private Gender gender;
 
     @Basic
-    @Column(name = "country", nullable = false, length = 30)
+    @Column(name = "country", nullable = false, length = 36)
     private String country;
 
     @Basic
-    @Column(name = "city", nullable = true, length = 30)
+    @Column(name = "city", nullable = true, length = 36)
     private String city;
 
     @Basic
@@ -79,7 +82,7 @@ public class Account {
             return this;
         }
 
-        public Account.Builder setGender(short gender) {
+        public Account.Builder setGender(Gender gender) {
             Account.this.gender = gender;
             return this;
         }
@@ -104,19 +107,4 @@ public class Account {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return id == account.id && gender == account.gender && Objects.equals(email, account.email) &&
-                Objects.equals(password, account.password) && Objects.equals(username, account.username) &&
-                Objects.equals(bio, account.bio) && Objects.equals(country, account.country) &&
-                Objects.equals(city, account.city) && Objects.equals(streetAddress, account.streetAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, password, username, bio, gender, country, city, streetAddress);
-    }
 }

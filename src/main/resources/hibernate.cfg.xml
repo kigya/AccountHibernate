@@ -10,9 +10,9 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/accounts</property>
     <property name="show_sql">true</property>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+    <property name="hibernate.connection.username">kirillborichevskiy</property>
+    <property name="hibernate.connection.password">1</property>
     <mapping class="com.kigya.account.entity.Account"/>
-    <mapping class="com.kigya.account.entity.Address"/>
     <mapping class="com.kigya.account.entity.CreditCard"/>
-    <mapping class="com.kigya.account.entity.User"/>
   </session-factory>
 </hibernate-configuration>
