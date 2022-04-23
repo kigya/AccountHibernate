@@ -13,6 +13,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @ToString
 @Accessors(fluent = true)
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "credit_card", schema = "public", catalog = "accounts")
 public class CreditCard {

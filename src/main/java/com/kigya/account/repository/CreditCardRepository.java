@@ -1,10 +1,7 @@
 package com.kigya.account.repository;
 
-import com.kigya.account.dao.AccountDaoImpl;
-import com.kigya.account.dao.AccountDatabase;
 import com.kigya.account.dao.CreditCardDaoImpl;
 import com.kigya.account.dao.CreditCardDatabase;
-import com.kigya.account.entity.Account;
 import com.kigya.account.entity.CreditCard;
 
 import java.util.List;
@@ -20,6 +17,10 @@ public class CreditCardRepository {
         ad.getCreditCardDao().addItem(creditCard);
     }
 
+    public void updateCreditCard(CreditCard creditCard) {
+        ad.getCreditCardDao().updateItem(creditCard);
+    }
+
     public CreditCard getCreditCardById(int id) {
         return ad.getCreditCardDao().getById(id);
     }
@@ -27,4 +28,5 @@ public class CreditCardRepository {
     public List<CreditCard> getCreditCardsByAccountId(int id) {
         return ad.getCreditCardDao().getByAccountId(id);
     }
+
 }

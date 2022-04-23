@@ -13,9 +13,15 @@ import java.util.List;
 
 public class CreditCardDaoImpl implements CreditCardDao {
 
+    private static final String TRANSACTION_ERROR =
+            "Transaction error!";
+    private static final String CREDIT_CARD_REPOSITORY_ERROR =
+            "Credit Card repository error!";
+
     @Override
     @SneakyThrows
     @Transient
+    @SuppressWarnings({"unchecked"})
     public List<CreditCard> findAll() {
         Transaction tx = null;
         List<CreditCard> creditCards;
@@ -28,9 +34,9 @@ public class CreditCardDaoImpl implements CreditCardDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Credit card repository error!");
+                throw new RepositoryException(e, CREDIT_CARD_REPOSITORY_ERROR);
             }
         }
         return creditCards;
@@ -49,9 +55,28 @@ public class CreditCardDaoImpl implements CreditCardDao {
             if (tx != null) {
                 tx.rollback();
             }
-            throw new RepositoryException(e, "Transaction error!");
+            throw new RepositoryException(e, TRANSACTION_ERROR);
         } catch (Exception e) {
-            throw new RepositoryException(e, "Credit card repository error!");
+            throw new RepositoryException(e, CREDIT_CARD_REPOSITORY_ERROR);
+        }
+    }
+
+    @SneakyThrows
+    @Override
+    public void updateItem(CreditCard creditCard) {
+        Transaction tx = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            tx = session.beginTransaction();
+            session.update(creditCard);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw new RepositoryException(e, TRANSACTION_ERROR);
+        } catch (Exception e) {
+            throw new RepositoryException(e, CREDIT_CARD_REPOSITORY_ERROR);
         }
     }
 
@@ -71,9 +96,9 @@ public class CreditCardDaoImpl implements CreditCardDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Credit card repository error!");
+                throw new RepositoryException(e, CREDIT_CARD_REPOSITORY_ERROR);
             }
         }
         return creditCard;
@@ -82,6 +107,7 @@ public class CreditCardDaoImpl implements CreditCardDao {
     @SneakyThrows
     @Transient
     @Override
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<CreditCard> getByAccountId(int idRequired) {
         Transaction tx = null;
         List creditCards;
@@ -96,9 +122,9 @@ public class CreditCardDaoImpl implements CreditCardDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Credit card repository error!");
+                throw new RepositoryException(e, CREDIT_CARD_REPOSITORY_ERROR);
             }
         }
         return creditCards;

@@ -7,7 +7,13 @@ import java.util.List;
 public interface CreditCardDao {
 
     List<CreditCard> findAll();
+
     void addItem(CreditCard creditCard);
+
+    void updateItem(CreditCard creditCard);
+
     CreditCard getById(int id);
+
     List<CreditCard> getByAccountId(int id);
+
 }

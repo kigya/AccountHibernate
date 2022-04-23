@@ -1,5 +1,6 @@
 package com.kigya.account.exception;
 
+@SuppressWarnings("unused")
 public final class AccountBioException extends Exception {
 
     public AccountBioException() {

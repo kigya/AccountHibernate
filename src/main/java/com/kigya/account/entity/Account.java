@@ -35,7 +35,7 @@ public class Account {
     private String username;
 
     @Basic
-    @Column(name = "bio", nullable = true, length = 256)
+    @Column(name = "bio", length = 256)
     private String bio;
 
     @Basic
@@ -47,11 +47,11 @@ public class Account {
     private String country;
 
     @Basic
-    @Column(name = "city", nullable = true, length = 36)
+    @Column(name = "city", length = 36)
     private String city;
 
     @Basic
-    @Column(name = "street_address", nullable = true, length = 50)
+    @Column(name = "street_address", length = 50)
     private String streetAddress;
 
     public static Account.@NotNull Builder newBuilder() {

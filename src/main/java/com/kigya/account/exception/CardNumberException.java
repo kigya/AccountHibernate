@@ -1,5 +1,6 @@
 package com.kigya.account.exception;
 
+@SuppressWarnings("unused")
 public final class CardNumberException extends Exception {
 
     public CardNumberException() {

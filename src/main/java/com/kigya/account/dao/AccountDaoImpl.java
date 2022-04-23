@@ -10,15 +10,23 @@ import org.hibernate.Transaction;
 import org.hibernate.type.StandardBasicTypes;
 
 import javax.persistence.Transient;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AccountDaoImpl implements AccountDao {
+
+    private static final String TRANSACTION_ERROR =
+            "Transaction error!";
+    private static final String ACCOUNT_REPOSITORY_ERROR =
+            "Account repository error!";
 
     @Override
     @SneakyThrows
     @Transient
+    @SuppressWarnings({"unchecked"})
     public List<Account> findAll() {
-
         Transaction tx = null;
         List<Account> accounts;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -30,9 +38,9 @@ public class AccountDaoImpl implements AccountDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Initialization transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Account repository error!");
+                throw new RepositoryException(e, ACCOUNT_REPOSITORY_ERROR);
             }
         }
         return accounts;
@@ -41,7 +49,6 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     @SneakyThrows
     public void addItem(Account account) {
-
         Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
@@ -51,18 +58,17 @@ public class AccountDaoImpl implements AccountDao {
             if (tx != null) {
                 tx.rollback();
             }
-            throw new RepositoryException(e, "Transaction error!");
+            throw new RepositoryException(e, TRANSACTION_ERROR);
         } catch (Exception e) {
-            throw new RepositoryException(e, "Account repository error!");
+            throw new RepositoryException(e, ACCOUNT_REPOSITORY_ERROR);
         }
     }
 
     @Override
     @SneakyThrows
     @Transient
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public Set<Integer> findAllId() {
-
         Transaction tx = null;
         List idList;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -77,9 +83,9 @@ public class AccountDaoImpl implements AccountDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Initialization transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Account repository error!");
+                throw new RepositoryException(e, ACCOUNT_REPOSITORY_ERROR);
             }
         }
         return new TreeSet<Integer>(idList);
@@ -100,11 +106,12 @@ public class AccountDaoImpl implements AccountDao {
                 if (tx != null) {
                     tx.rollback();
                 }
-                throw new RepositoryException(e, "Initialization transaction error!");
+                throw new RepositoryException(e, TRANSACTION_ERROR);
             } catch (Exception e) {
-                throw new RepositoryException(e, "Account repository error!");
+                throw new RepositoryException(e, ACCOUNT_REPOSITORY_ERROR);
             }
         }
         return account;
     }
+
 }

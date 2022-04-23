@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Extensions {
 
@@ -18,7 +19,7 @@ public class Extensions {
         return s.replace(" ", "").trim();
     }
 
-    public static @NotNull Double setStandartPrecision(Double value) {
+    public static @NotNull Double setStandardPrecision(Double value) {
         double scale = Math.pow(10, 3);
         return Math.round(value * scale) / scale;
     }

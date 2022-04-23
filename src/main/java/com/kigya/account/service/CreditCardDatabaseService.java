@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 @ExtensionMethod({Extensions.class})
 public class CreditCardDatabaseService {
 
@@ -18,28 +19,22 @@ public class CreditCardDatabaseService {
         return repository.getAllCreditCards();
     }
 
-    public boolean addCreditCard(@NotNull CreditCard creditCard) {
-
-        boolean check = true;
+    public boolean updateCreditCard(CreditCard creditCard) {
         format(creditCard);
 
-        if (!Valid.isValidCardNumber(creditCard.cardNumber())) {
-            check = false;
+        if (check(creditCard)) {
+            repository.updateCreditCard(creditCard);
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        if (!Valid.isValidBalance(creditCard.balance())) {
-            check = false;
-        }
+    public boolean addCreditCard(@NotNull CreditCard creditCard) {
 
-        if (!Valid.isValidCardType(creditCard.cardType())) {
-            check = false;
-        }
+        format(creditCard);
 
-        if (!Valid.isValidCardAccountId(creditCard.accountId())) {
-            check = false;
-        }
-
-        if (check) {
+        if (check(creditCard)) {
             repository.addCreditCard(creditCard);
             return true;
         } else {
@@ -48,22 +43,48 @@ public class CreditCardDatabaseService {
 
     }
 
+    private boolean check(@NotNull CreditCard creditCard) {
+        if (!Valid.isValidCardNumber(creditCard.cardNumber())) {
+            return false;
+        }
+
+        if (!Valid.isValidBalance(creditCard.balance())) {
+            return false;
+        }
+
+        if (!Valid.isValidCardType(creditCard.cardType())) {
+            return false;
+        }
+
+        return Valid.isValidCardAccountId(creditCard.accountId());
+    }
+
     private void format(@NotNull CreditCard creditCard) {
         creditCard.cardNumber(creditCard.cardNumber()
                 .deleteWhitespaces());
 
         creditCard.balance(Double.valueOf(creditCard.balance())
-                .setStandartPrecision());
+                .setStandardPrecision());
     }
 
     public CreditCard getCreditCardById(int id) {
         return repository.getCreditCardById(id);
     }
 
-    public List<CreditCard> getCreditCardByAccountId(int id) {
+    public List<CreditCard> getCreditCardsByAccountId(int id) {
         return repository.getCreditCardsByAccountId(id);
     }
 
-
+    public boolean makeTransfer(@NotNull CreditCard from, CreditCard to, double amount) {
+        if (from.balance() >= amount) {
+            from.balance(from.balance() - amount);
+            to.balance(to.balance() + amount);
+            repository.updateCreditCard(from);
+            repository.updateCreditCard(to);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

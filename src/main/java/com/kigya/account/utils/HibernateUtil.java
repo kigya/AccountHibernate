@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+@SuppressWarnings("unused")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Log4j2
 public final class HibernateUtil {

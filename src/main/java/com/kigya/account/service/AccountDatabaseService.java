@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+@SuppressWarnings("unused")
 @ExtensionMethod({Extensions.class})
 public class AccountDatabaseService {
 
@@ -108,4 +109,5 @@ public class AccountDatabaseService {
                     .trim());
         }
     }
+
 }
