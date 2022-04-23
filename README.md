@@ -156,7 +156,7 @@ on conflict (id) do update
 ```
 
 
-##### 📁Query to reset the counter
+##### 📁 Query to reset the counter
 ```sql
 SELECT MAX(id)
 FROM account;
@@ -164,3 +164,7 @@ SELECT nextval('account_id_seq');
 
 SELECT setval('account_id_seq', (SELECT MAX(id) FROM account) + 1);
 ```
+
+##### 📁 Project UML Diagram
+![Account](https://user-images.githubusercontent.com/73034324/164916107-e80682eb-d730-4fc4-bba1-b8d6f2bae4f8.png)
+
