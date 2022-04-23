@@ -8,5 +8,6 @@ public interface CreditCardDao {
 
     List<CreditCard> findAll();
     void addItem(CreditCard creditCard);
-
+    CreditCard getById(int id);
+    List<CreditCard> getByAccountId(int id);
 }

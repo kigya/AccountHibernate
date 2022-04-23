@@ -19,4 +19,12 @@ public class CreditCardRepository {
     public void addCreditCard(CreditCard creditCard) {
         ad.getCreditCardDao().addItem(creditCard);
     }
+
+    public CreditCard getCreditCardById(int id) {
+        return ad.getCreditCardDao().getById(id);
+    }
+
+    public List<CreditCard> getCreditCardsByAccountId(int id) {
+        return ad.getCreditCardDao().getByAccountId(id);
+    }
 }

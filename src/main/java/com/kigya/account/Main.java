@@ -3,11 +3,13 @@ package com.kigya.account;
 import com.kigya.account.entity.Account;
 import com.kigya.account.entity.Gender;
 import com.kigya.account.service.AccountDatabaseService;
+import com.kigya.account.service.CreditCardDatabaseService;
+import com.kigya.account.valid.Valid;
 
 public class Main {
 
     public static void main(String[] args) {
-        AccountDatabaseService service = new AccountDatabaseService();
+        CreditCardDatabaseService service = new CreditCardDatabaseService();
 
         Account account = Account.newBuilder()
                 .setEmail("jdjdjdj@gmail.com")
@@ -19,7 +21,7 @@ public class Main {
                 .setCity("sshshsh")
                 .build();
 
-        System.out.println(account);
+        System.out.println(service.getCreditCardByAccountId(2));
     }
 
 }

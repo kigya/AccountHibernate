@@ -2,6 +2,7 @@ package com.kigya.account.valid;
 
 import com.kigya.account.entity.CardType;
 import com.kigya.account.entity.Gender;
+import com.kigya.account.repository.AccountRepository;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.EnumUtils;
@@ -70,8 +71,8 @@ public final class Valid {
 
     @Contract(pure = true)
     public static boolean isValidCardAccountId(int id) {
-        // TODO implement database query selection accounts id and check it
-        return true;
+        final AccountRepository repository = new AccountRepository();
+        return repository.getIdSet().contains(id);
     }
 
     @Contract(pure = true)

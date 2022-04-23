@@ -7,9 +7,10 @@ import lombok.SneakyThrows;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.type.StandardBasicTypes;
 
 import javax.persistence.Transient;
-import java.util.List;
+import java.util.*;
 
 public class AccountDaoImpl implements AccountDao {
 
@@ -17,6 +18,7 @@ public class AccountDaoImpl implements AccountDao {
     @SneakyThrows
     @Transient
     public List<Account> findAll() {
+
         Transaction tx = null;
         List<Account> accounts;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -39,8 +41,8 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     @SneakyThrows
     public void addItem(Account account) {
-        Transaction tx = null;
 
+        Transaction tx = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             tx = session.beginTransaction();
             session.save(account);
@@ -53,5 +55,56 @@ public class AccountDaoImpl implements AccountDao {
         } catch (Exception e) {
             throw new RepositoryException(e, "Account repository error!");
         }
+    }
+
+    @Override
+    @SneakyThrows
+    @Transient
+    @SuppressWarnings({"unchecked"})
+    public Set<Integer> findAllId() {
+
+        Transaction tx = null;
+        List idList;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            try {
+                tx = session.beginTransaction();
+                idList = Collections.unmodifiableList(session
+                        .createNativeQuery("SELECT id FROM Account")
+                        .addScalar("id", StandardBasicTypes.INTEGER)
+                        .list());
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw new RepositoryException(e, "Initialization transaction error!");
+            } catch (Exception e) {
+                throw new RepositoryException(e, "Account repository error!");
+            }
+        }
+        return new TreeSet<Integer>(idList);
+    }
+
+    @SneakyThrows
+    @Transient
+    @Override
+    public Account getById(int idRequired) {
+        Transaction tx = null;
+        Account account;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            try {
+                tx = session.beginTransaction();
+                account = session.get(Account.class, idRequired);
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw new RepositoryException(e, "Initialization transaction error!");
+            } catch (Exception e) {
+                throw new RepositoryException(e, "Account repository error!");
+            }
+        }
+        return account;
     }
 }

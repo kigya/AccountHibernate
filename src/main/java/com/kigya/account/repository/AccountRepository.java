@@ -5,6 +5,7 @@ import com.kigya.account.dao.AccountDatabase;
 import com.kigya.account.entity.Account;
 
 import java.util.List;
+import java.util.Set;
 
 public class AccountRepository {
 
@@ -14,8 +15,16 @@ public class AccountRepository {
         return ad.getAccountDao().findAll();
     }
 
-    public void addApplicant(Account account) {
+    public void addAccount(Account account) {
         ad.getAccountDao().addItem(account);
+    }
+
+    public Set<Integer> getIdSet() {
+        return ad.getAccountDao().findAllId();
+    }
+
+    public Account getAccountById(int id) {
+        return ad.getAccountDao().getById(id);
     }
 
 }

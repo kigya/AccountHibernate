@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @ExtensionMethod({Extensions.class})
 public class AccountDatabaseService {
@@ -21,42 +22,61 @@ public class AccountDatabaseService {
 
     public boolean addAccount(@NotNull Account account) {
 
+        boolean check = true;
+
         format(account);
 
         if (!Valid.isValidEmail(account.email())) {
-            return false;
+            check = false;
         }
 
         if (!Valid.isValidPassword(account.password())) {
-            return false;
+            check = false;
         }
 
         if (!Valid.isValidUsername(account.username())) {
-            return false;
+            check = false;
         }
 
         if (account.bio() != null && !Valid.isValidBio(account.bio())) {
-            return false;
+            check = false;
         }
 
         if (!Valid.isValidGender(account.gender())) {
-            return false;
+            check = false;
         }
 
         if (!Valid.isValidCountry(account.country())) {
-            return false;
+            check = false;
         }
 
         if (account.city() != null && !Valid.isValidCity(account.city())) {
+            check = false;
+        }
+
+        if (account.streetAddress() != null &&
+                !Valid.isValidStreetAddress(account.streetAddress())) {
+            check = false;
+        }
+
+        if (check) {
+            repository.addAccount(account);
+            return true;
+        } else {
             return false;
         }
 
-        return account.streetAddress() == null ||
-                Valid.isValidStreetAddress(account.streetAddress());
-
     }
 
-    private void format(@NotNull Account account){
+    public Set<Integer> getAllId() {
+        return repository.getIdSet();
+    }
+
+    public Account getAccountById(int id) {
+        return repository.getAccountById(id);
+    }
+
+    private void format(@NotNull Account account) {
         account.email(account.email()
                 .toLowerCase(Locale.ROOT)
                 .trim());

@@ -54,5 +54,54 @@ public class CreditCardDaoImpl implements CreditCardDao {
             throw new RepositoryException(e, "Credit card repository error!");
         }
     }
+
+
+    @SneakyThrows
+    @Transient
+    @Override
+    public CreditCard getById(int id) {
+        Transaction tx = null;
+        CreditCard creditCard;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            try {
+                tx = session.beginTransaction();
+                creditCard = session.get(CreditCard.class, id);
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw new RepositoryException(e, "Transaction error!");
+            } catch (Exception e) {
+                throw new RepositoryException(e, "Credit card repository error!");
+            }
+        }
+        return creditCard;
+    }
+
+    @SneakyThrows
+    @Transient
+    @Override
+    public List<CreditCard> getByAccountId(int idRequired) {
+        Transaction tx = null;
+        List creditCards;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            try {
+                tx = session.beginTransaction();
+                creditCards = session
+                        .createQuery("FROM CreditCard WHERE accountId = :idRequired")
+                        .setParameter("idRequired", idRequired).list();
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                throw new RepositoryException(e, "Transaction error!");
+            } catch (Exception e) {
+                throw new RepositoryException(e, "Credit card repository error!");
+            }
+        }
+        return creditCards;
+    }
 }
 
